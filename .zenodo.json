@@ -1,0 +1,24 @@
+{
+  "title": "선발이 내려오는 순간 — KBO 10시즌으로 본 선발투수 피로도와 교체 타이밍",
+  "description": "KBO 2017–2026 열 시즌의 공식 기록과 중계 추적 데이터로 선발투수의 피로와 교체 타이밍을 분석한 프로젝트. 수집·파싱·검증 파이프라인, 자체 계산한 득점기대값(RE24)과 승리기대값(WE/WPA), 강판 확률 예측 모델, 그리고 2026 시즌 홀드아웃 검정을 위한 사전 등록 파일을 포함한다. 원시 데이터는 재배포하지 않으며 수집 코드만 공개한다.",
+  "creators": [
+    {
+      "name": "Min, Donggook"
+    }
+  ],
+  "keywords": [
+    "baseball analytics",
+    "KBO",
+    "sabermetrics",
+    "pitcher fatigue",
+    "times through the order",
+    "run expectancy",
+    "win probability",
+    "pre-registration",
+    "python"
+  ],
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "language": "kor"
+}
