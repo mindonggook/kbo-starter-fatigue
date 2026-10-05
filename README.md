@@ -5,6 +5,8 @@ KBO 10시즌(2017–2026)으로 본 선발투수 피로도와 교체 타이밍.
 > **선발이 내려오는 이유는 피로가 아니다.** 피로는 실재하지만 결과를 크게 움직이지 않고,
 > 결과를 움직이는 것은 타자가 그 투수의 구종을 배워가는 과정이다.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23158884.svg)](https://doi.org/10.5281/zenodo.23158884)
+
 **📊 [리포트 읽기 — 발견 40개 + 부록 4부](https://claude.ai/artifact/6dPPeKJSaYw3NW6TNmiRSD)**
 
 > 수집부터 결론까지의 전 과정과, 외부 평가를 두 차례 받아 스스로 고친 기록까지 담았다.
@@ -100,7 +102,10 @@ python -m pytest tests -q      # 40개 테스트, 약 5초
 ## 6. 사전 등록
 
 2026 시즌 종료(10월 9일) 전에 예측값을 고정했다.
-`prereg.txt` · `prereg_designC.txt` · `prereg_manifest.json`
+**Zenodo DOI [10.5281/zenodo.23158884](https://doi.org/10.5281/zenodo.23158884)** 가 그 시점의 스냅샷을 보관한다 —
+Git 태그와 달리 저장소 주인이 지우거나 바꿀 수 없다.
+
+`prereg.txt` · `prereg_designC.txt` · `prereg_manifest.json` · `VERIFY.md`
 
 - 예측값은 **2017–2025만으로** 계산했다 (2026은 한 숫자도 쓰지 않음)
 - 합격 기준: 9개 예측구간 중 **8개 이상**이 맞으면 재현
