@@ -1,0 +1,20 @@
+# 원시 데이터와 캐시는 올리지 않는다.
+# KBO 기록실·네이버 스포츠 모두 공개 문서가 있는 API가 아니므로
+# 수집 코드만 공개하고 데이터는 재배포하지 않는다. 직접 수집해야 한다.
+data/
+
+# 가상환경
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# 실행 로그와 중간 산출물
+*.log
+scratch_*.txt
+pipeline_stats.txt
+
+# 분석 요약 텍스트는 결과물이므로 올린다 (eda_*_summary.txt, prereg*.txt)
+# 단, 임시 파일은 제외
+.DS_Store
+Thumbs.db

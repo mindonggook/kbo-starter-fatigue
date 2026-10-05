@@ -1,0 +1,5 @@
+타석: 3번타자 김현수
+  {"text": "1구 스트라이크", "stuff": "직구", "speed": "145", "pitchResult": "T", "pitchNum": 1, "ptsPitchId": "240323_141054", "type": 1}
+  {"text": "2구 타격", "stuff": "직구", "speed": "145", "pitchResult": "H", "pitchNum": 2, "ptsPitchId": "240323_141111", "type": 1}
+
+pts 항목 키: pitchId, inn, ballcount, crossPlateX, crossPlateY, topSz, bottomSz, vy0, vz0, vx0, z0, y0, x0, ax, ay, az, stance

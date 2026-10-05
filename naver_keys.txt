@@ -1,0 +1,20 @@
+[캐시 원문 안 패턴 검색]
+  직구: 133
+  슬라이더: 30
+  커브: 37
+  체인지업: 21
+  포크: 20
+  투심: 0
+  커터: 45
+  싱커: 0
+  구종: 0
+  stuff: 543
+  pitchType: 0
+  ballType: 0
+  type2: 0
+  speed: 286
+  구속: 0
+  km: 0
+
+[캐시에 저장된 키 전체]
+  1, 2, 3, 4, 5, 50106, 50726, 51715, 52720, 53139, 53754, 54134, 54149, 6, 60768, 61101, 61145, 61666, 63961, 64596, 65109, 65616, 65707, 65764, 65769, 67703, 69103, 69108, 7, 75867, 76715, 79140, 8, 9, ab, away, awayBallFour, awayError, awayHit, awayScore, awayTeamWinRate, ax, ay, az, backnum, ball, ballCount, ballcount, base1, base2, base3, batOrder, batResult, batter, batterRecord, bb, bhome, birth, bottomSz, cin, cout, crossPlateX, crossPlateY, currentGamePlayerStats, currentGameState, currentPlayersInfo, currentSeasonStats, currentSeasonStatsOnOpponents, er, era, gameCount, game_id, hbp, height, hit, hitType, home, homeBallFour, homeError, homeHit, homeOrAway, homeScore, homeTeamWinRate, hr, hra, inPlayer, inn, inn2, innings, kk, l, liveText, metricOption, monthlyStats, name, no, obp, out, outPlayer, outPlayerTurn, pa, pcode, pitchId, pitchNum, pitchResult, pitcher, playerChange, playerId, playerName, playerPos, playerType, pos, posName, psHra, ptsOptions, ptsPitchId, rbi, roster, run, s, season, seasonEra, seasonHra, seqno, shiftMessage, shiftPlayer, so, speed, stance, statusCode, strike, strikeCount, stuff, text, textOptions, title, titleStyle, todayHra, topSz, totalSeasonStats, type, vsHra, vx0, vy0, vz0, w, weight, whip, wpaByPlate, x0, y0, z0
