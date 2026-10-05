@@ -3,6 +3,7 @@
 Artifact로 게시하면 로컬 파일 경로는 못 읽으므로 그림을 전부 인라인해야 한다.
 """
 import base64
+import json
 import re
 import sys
 from pathlib import Path
@@ -55,12 +56,36 @@ IMAGES = {
     "{{IMG_HOOKTYPE}}": "hook_types_fix.png",
     "{{IMG_TIERCI}}": "tier_ci.png",
     "{{IMG_TIERWPA}}": "tier_wpa.png",
+    "{{IMG_TIERWPA2}}": "tier_wpa2.png",
     "{{IMG_SHAP}}": "model_shap.png",
 }
 
 
+NUMBERS = ROOT / "key_numbers.json"
+
+
+def inject_numbers(html: str) -> str:
+    """{{N_*}} 자리에 대표값을 넣는다.
+
+    숫자를 본문에 직접 타이핑하면 분석을 다시 돌릴 때마다 어긋난다 --
+    실제로 외부 평가가 세 번 연속 같은 종류의 불일치를 지적했다.
+    대표값은 key_numbers.py가 분석 요약에서 뽑아 한 파일에 모으고,
+    리포트는 여기서만 읽는다.
+    """
+    if not NUMBERS.exists():
+        raise SystemExit("key_numbers.json이 없다 — src/key_numbers.py를 먼저 돌려야 한다")
+    nums = json.loads(NUMBERS.read_text(encoding="utf-8"))
+    for key, d in nums.items():
+        html = html.replace("{{N_" + key + "}}", d["text"])
+
+    leftover = sorted(set(re.findall(r"\{\{N_[^}]+\}\}", html)))
+    if leftover:
+        raise SystemExit(f"key_numbers.json에 없는 숫자 자리표시자: {leftover}")
+    return html
+
+
 def build(template: Path, out: Path) -> None:
-    html = template.read_text(encoding="utf-8")
+    html = inject_numbers(template.read_text(encoding="utf-8"))
     for token, filename in IMAGES.items():
         raw = (FIG / filename).read_bytes()
         uri = "data:image/png;base64," + base64.b64encode(raw).decode("ascii")
