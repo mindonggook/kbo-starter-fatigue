@@ -1,0 +1,36 @@
+name: tests
+
+# 데이터(data/)는 저장소에 없으므로, 여기서 도는 것은 단위 테스트다.
+# 실데이터가 있어야 하는 검산(test_validation.py)은 자동으로 건너뛴다.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: 의존성 설치
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 단위 테스트 (데이터 불필요)
+        run: python -m pytest tests/test_units.py -v
+
+      - name: 전체 테스트 (실데이터 검산은 건너뜀)
+        run: python -m pytest tests -q

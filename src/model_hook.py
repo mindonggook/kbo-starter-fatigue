@@ -26,6 +26,8 @@ from sklearn.metrics import (roc_auc_score, log_loss, brier_score_loss,
                              average_precision_score)
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 FIG = Path(__file__).resolve().parent.parent / "figures"
 FIG.mkdir(exist_ok=True)
 
@@ -332,7 +334,7 @@ def main():
     fig2.savefig(FIG / "model_shap.png")
     plt.close(fig2)
 
-    path = DATA.parent / "model_hook_summary.txt"
+    path = RESULTS / "model_hook_summary.txt"
     path.write_text("\n".join(L), encoding="utf-8")
     print(f"summary -> {path}")
 

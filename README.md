@@ -5,6 +5,7 @@ KBO 10시즌(2017–2026)으로 본 선발투수 피로도와 교체 타이밍.
 > **선발이 내려오는 이유는 피로가 아니다.** 피로는 실재하지만 결과를 크게 움직이지 않고,
 > 결과를 움직이는 것은 타자가 그 투수의 구종을 배워가는 과정이다.
 
+[![tests](https://github.com/mindonggook/kbo-starter-fatigue/actions/workflows/tests.yml/badge.svg)](https://github.com/mindonggook/kbo-starter-fatigue/actions/workflows/tests.yml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23158884.svg)](https://doi.org/10.5281/zenodo.23158884)
 
 **📊 [리포트 읽기 — 발견 40개 + 부록 4부](https://claude.ai/artifact/6dPPeKJSaYw3NW6TNmiRSD)**
@@ -61,8 +62,14 @@ KBO 일정(Schedule.asmx)  →  박스스코어(GetBoxScoreScroll)  →  문자�
 ## 3. 검증
 
 ```bash
-python -m pytest tests -q      # 40개 테스트, 약 5초
+python -m pytest tests -q            # 전체 71개
+python -m pytest tests/test_units.py # 데이터 없이 도는 31개
 ```
+
+`tests/test_units.py`는 **데이터 없이 돈다** — 순수 함수만 보므로 저장소를 내려받은
+사람도 바로 돌릴 수 있고, GitHub Actions가 push마다 실행한다.
+고른 기준은 하나다: **실제로 한 번 틀렸던 곳**(타석 분류, 릴리스 역외삽, 주자 판정).
+`tests/test_validation.py`는 실데이터 검산이라 `data/`가 없으면 건너뛴다.
 
 | 무엇을 | 어떻게 | 결과 |
 |---|---|---|
@@ -125,7 +132,23 @@ python src/winexp.py                      # 승리확률
 python -m pytest tests -q                 # 검산
 ```
 
-## 8. 데이터 정책
+## 8. 폴더 구조
+
+```
+src/        수집·파싱·분석 코드 (63개 파일)
+tests/      단위 테스트 + 실데이터 검산
+results/    분석 요약 txt (63개) — 각 발견의 근거 수치
+figures/    그림 (63장)
+data/       원시 캐시와 parquet — 저장소에 포함하지 않는다
+prereg*.* / VERIFY.md    사전 등록과 검증 절차
+key_numbers.json         리포트가 읽는 대표값 (src/key_numbers.py가 생성)
+```
+
+리포트의 숫자는 본문에 타이핑하지 않는다.
+`분석 → results/*_summary.txt → key_numbers.py → key_numbers.json → build_report.py`
+로 흐르고, 중간이 어긋나면 빌드가 멈춘다.
+
+## 9. 데이터 정책
 
 KBO 기록실과 네이버 스포츠 모두 **공개 문서가 있는 API가 아니다.**
 수집은 개인 분석 목적으로 간격을 충분히 두고 했고,

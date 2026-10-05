@@ -26,6 +26,8 @@ import statsmodels.api as sm
 import tiers as T
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 FIG = Path(__file__).resolve().parent.parent / "figures"
 FIG.mkdir(exist_ok=True)
 
@@ -328,7 +330,7 @@ def main():
     fig.savefig(FIG / "bullpen_cost.png")
     plt.close(fig)
 
-    path = DATA.parent / "eda_bullpen_cost_summary.txt"
+    path = RESULTS / "eda_bullpen_cost_summary.txt"
     path.write_text("\n".join(L), encoding="utf-8")
     print(f"summary -> {path}")
 

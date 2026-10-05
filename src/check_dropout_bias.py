@@ -15,6 +15,8 @@ import numpy as np
 import pandas as pd
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 FIG = Path(__file__).resolve().parent.parent / "figures"
 FIG.mkdir(exist_ok=True)
 
@@ -135,7 +137,7 @@ def main() -> None:
         lines.append("→ 관측 가능한 특성에서 통과/걸러짐 사이에 유의한 차이가 없다.")
 
     out = "\n".join(lines)
-    path = DATA.parent / "dropout_bias_summary.txt"
+    path = RESULTS / "dropout_bias_summary.txt"
     path.write_text(out, encoding="utf-8")
     fig_bias(res)
     print(f"summary -> {path}")

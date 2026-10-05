@@ -21,6 +21,8 @@ import pandas as pd
 import statsmodels.api as sm
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 FIG = Path(__file__).resolve().parent.parent / "figures"
 FIG.mkdir(exist_ok=True)
 
@@ -197,7 +199,7 @@ def main() -> None:
         lines.append(f"  {band} / {vel}: {row['강판율']*100:.1f}% (n={int(row['n']):,})")
 
     out = "\n".join(lines)
-    path = DATA.parent / "eda_hook_velocity_summary.txt"
+    path = RESULTS / "eda_hook_velocity_summary.txt"
     path.write_text(out, encoding="utf-8")
     print(f"summary -> {path}")
 

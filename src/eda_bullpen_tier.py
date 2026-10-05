@@ -21,6 +21,8 @@ import pandas as pd
 from kbo_client import TEAM_CODE
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 FIG = Path(__file__).resolve().parent.parent / "figures"
 FIG.mkdir(exist_ok=True)
 
@@ -217,7 +219,7 @@ def main() -> None:
         lines.append(f"  {idx}: {r['5~8회 구원 타석 비중']:.1f}%")
 
     out = "\n".join(lines)
-    path = DATA.parent / "eda_bullpen_tier_summary.txt"
+    path = RESULTS / "eda_bullpen_tier_summary.txt"
     path.write_text(out, encoding="utf-8")
     print(f"summary -> {path}")
 

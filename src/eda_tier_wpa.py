@@ -22,6 +22,8 @@ import tiers as T
 from kbo_client import TEAM_CODE
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 FIG = Path(__file__).resolve().parent.parent / "figures"
 FIG.mkdir(exist_ok=True)
 
@@ -86,9 +88,16 @@ def fit(d, y="WPA"):
     return f, cols
 
 
-def gain(f, key, scale=900):
-    """이득 = 선발 − 구원 = −계수. 9타자 환산 후 %p로."""
+def gain(f, key, scale=900, pitcher_view=True):
+    """교체 이득.
+
+    부호 주의 -- 두 지표의 관점이 반대다.
+      득점가치 : 타자팀 관점(클수록 투수에게 나쁘다) -> 이득 = -계수
+      WPA·환산 : 투수팀 관점(클수록 투수에게 좋다)   -> 이득 = +계수
+    """
     ci = f.conf_int().loc[key]
+    if pitcher_view:
+        return f.params[key] * scale, ci[0] * scale, ci[1] * scale, (ci[0] > 0) == (ci[1] > 0)
     return -f.params[key] * scale, -ci[1] * scale, -ci[0] * scale, (ci[0] > 0) == (ci[1] > 0)
 
 
@@ -133,7 +142,7 @@ def main():
     f_wp, _ = fit(both_all, "WPA")
     L.append("  " + "교체 대상".ljust(12) + f"{'실점(점)':>14s}{'승률(%p)':>16s}")
     for c in cols_rv:
-        g_rv = gain(f_rv, c, scale=9)
+        g_rv = gain(f_rv, c, 9, pitcher_view=False)
         g_wp = gain(f_wp, c)
         L.append("  " + c.replace("구원 ", "").ljust(12)
                  + f"{g_rv[0]:>+10.3f}{'*' if g_rv[3] else ' ':>2s}"
@@ -190,7 +199,7 @@ def main():
     fig.savefig(FIG / "tier_wpa.png")
     plt.close(fig)
 
-    path = DATA.parent / "eda_tier_wpa_summary.txt"
+    path = RESULTS / "eda_tier_wpa_summary.txt"
     path.write_text("\n".join(L), encoding="utf-8")
     print(f"summary -> {path}")
 

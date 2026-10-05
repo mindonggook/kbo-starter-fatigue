@@ -18,6 +18,8 @@ import pandas as pd
 import statsmodels.api as sm
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 FIG = Path(__file__).resolve().parent.parent / "figures"
 FIG.mkdir(exist_ok=True)
 
@@ -191,7 +193,7 @@ def main() -> None:
                  f"{'유의함' if (vci[0]>0)==(vci[1]>0) else '유의하지 않음'}")
 
     out = "\n".join(lines)
-    path = DATA.parent / "eda_relief_velocity_summary.txt"
+    path = RESULTS / "eda_relief_velocity_summary.txt"
     path.write_text(out, encoding="utf-8")
     print(f"summary -> {path}")
 

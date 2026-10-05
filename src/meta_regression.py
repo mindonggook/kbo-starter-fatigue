@@ -22,6 +22,8 @@ import statsmodels.api as sm
 from compare_seasons import metrics
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 FIG = Path(__file__).resolve().parent.parent / "figures"
 FIG.mkdir(exist_ok=True)
 
@@ -171,7 +173,7 @@ def main() -> None:
         lines.append("")
 
     out = "\n".join(lines)
-    path = DATA.parent / "meta_regression_summary.txt"
+    path = RESULTS / "meta_regression_summary.txt"
     path.write_text(out, encoding="utf-8")
     print(f"summary -> {path}")
 

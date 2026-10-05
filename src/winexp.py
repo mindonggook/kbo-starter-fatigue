@@ -27,6 +27,8 @@ import pandas as pd
 from runvalue import load_states, attach_end_score
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 SEASONS = tuple(range(2017, 2027))
 FEATS = ["inning", "말", "점수차_홈", "아웃카운트", "주자수"]
 
@@ -163,7 +165,7 @@ def main():
         L.append(f"    {idx}: 1점당 승률 {slope*100:5.2f}%p (n={len(g):,})")
     L.append("")
 
-    path = DATA.parent / "winexp_summary.txt"
+    path = RESULTS / "winexp_summary.txt"
     path.write_text("\n".join(L), encoding="utf-8")
     print(f"summary -> {path}")
 

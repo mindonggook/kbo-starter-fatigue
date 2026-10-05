@@ -18,6 +18,8 @@ import numpy as np
 import pandas as pd
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 TIERS = ["추격조", "중간", "필승조"]
 
 
@@ -148,5 +150,5 @@ if __name__ == "__main__":
     for idx, r in ct.iterrows():
         L.append(f"    {idx:6s}" + "".join(f"{v:>10,}" for v in r))
 
-    (DATA.parent / "tiers_summary.txt").write_text("\n".join(L), encoding="utf-8")
+    (RESULTS / "tiers_summary.txt").write_text("\n".join(L), encoding="utf-8")
     print("summary -> tiers_summary.txt")

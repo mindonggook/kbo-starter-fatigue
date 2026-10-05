@@ -20,11 +20,12 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "key_numbers.json"
+RESULTS = ROOT / "results"
+OUT = ROOT / "key_numbers.json"   # 리포트 빌드가 읽으므로 루트에 둔다
 
 
 def read(name):
-    p = ROOT / name
+    p = RESULTS / name
     if not p.exists():
         raise SystemExit(f"요약 파일이 없다: {name} — 해당 분석을 먼저 돌려야 한다")
     return p.read_text(encoding="utf-8")
@@ -156,5 +157,5 @@ if __name__ == "__main__":
     lines = [f"대표값 {len(payload)}개 -> {OUT.name}"]
     for k, d in payload.items():
         lines.append(f"  {{{{N_{k}}}}}".ljust(32) + f"{d['text']:>10s}")
-    (ROOT / "key_numbers_summary.txt").write_text("\n".join(lines), encoding="utf-8")
+    (RESULTS / "key_numbers_summary.txt").write_text("\n".join(lines), encoding="utf-8")
     print(f"key_numbers.json ({len(payload)}개)")

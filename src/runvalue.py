@@ -22,6 +22,8 @@ import numpy as np
 import pandas as pd
 
 DATA = Path(__file__).resolve().parent.parent / "data"
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+RESULTS.mkdir(exist_ok=True)
 SEASONS = tuple(range(2017, 2027))
 
 
@@ -138,5 +140,5 @@ if __name__ == "__main__":
              f"{w.loc['삼진','가중치'] - w.loc['인플레이 아웃','가중치']:+.4f} 점")
     L.append(f"  안타와 삼진의 차이      : "
              f"{w.loc['안타','가중치'] - w.loc['삼진','가중치']:+.4f} 점")
-    (DATA.parent / "runvalue_summary.txt").write_text("\n".join(L), encoding="utf-8")
+    (RESULTS / "runvalue_summary.txt").write_text("\n".join(L), encoding="utf-8")
     print("summary -> runvalue_summary.txt")
